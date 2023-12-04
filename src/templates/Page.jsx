@@ -1,8 +1,11 @@
 import { Children, useState } from 'react';
+import {AppBar, Toolbar, Typography} from '@mui/material';
+import { Link } from 'react-router-dom';
+import gandalf from '../icons/gandalf.png'
 
 const Page = (props) => {
   // template properties
-  const {title, titleButton, childrenComp} = props
+  const {title, titleButton, childrenComp, backButton} = props
 
   // card hooks
   const [open, setOpen] = useState(false);
@@ -15,17 +18,27 @@ const Page = (props) => {
 
   return (
     <div className="app">
-      <div className= "app-title">
-        <h1>CAMP-E2E</h1>
-      </div>
+      <AppBar className= "app-title">
+        <Toolbar disableGutters>
+          <img src={gandalf} alt="gandalf.png"/>
+          <Typography
+            variant="h5"
+          >
+            CAMP-E2E
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <div className= "app-body">
+        {backButton && 
+          <Link to="/" style={{ textDecoration: 'none', paddingBottom: '5px'}}> 
+            {"< Back"}
+          </Link>
+        }
         <div className='app-body-header'>
-          <h1 className='app-body-title'>{title}</h1>
+          <h1 className='app-body-header-title'>{title}</h1>
           {titleButton}
         </div>
-        <div className='app-body-content'>
-          {childrenComp}
-        </div>
+        {childrenComp}
       </div>
     </div>
   );

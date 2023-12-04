@@ -5,21 +5,14 @@ import TestResultsPage from './pages/TestResultsPage';
 
 const App = () => {
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/testResults/:test_id" component={TestResultsPage} />
-    //     <Route path="/" component={HomePage} />
-    //   </Routes>
-    // </BrowserRouter>
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<HomePage />}>
+      <Routes>
+        <Route path="/" element={<HomePage />}/>
         <Route
           path="testResults/:test_id"
           element={<TestResultsPage />}
         />
-      </Route>
-    </Routes>
+      </Routes>
     </BrowserRouter>
   );
 }

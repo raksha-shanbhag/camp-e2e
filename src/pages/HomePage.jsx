@@ -1,40 +1,23 @@
 import { useEffect, useState } from 'react';
 import Page from '../templates/Page';
-import TestConfiguration from '../components/TestConfiguration';
+import CardDisplay from '../components/CardDisplay';
 import CreateNewConfiguration from '../components/CreateNewConfiguration';
+import { Button } from '@mui/material';
 
-const defaultTests = [
+var defaultTests = [
   {
-    name: "Raksha Test",
+    name: "Raksha Teaksha writes these testsaksha writes these testsaksha writes these testsst",
     description: "Raksha writes these tests",
-    productIdMapping: "{isisje3224jjdkji: APM_44}"
+    productIdMapping: "{isisje3224jjdkji: APM_{isisje3224jjdkji: APM_{isisje3224jjdkji: APM_44}"
   }, 
   {
     name: "Raksha2 Test",
     description: "Raksha2 writes these tests",
     productIdMapping: "{isisje322455jdkji: APM_45}"
-  },
-  {
-    name: "Raksha3 Test",
-    description: "Raksha 3writes these tests",
-    productIdMapping: "{a44isje3224jjdkji: APM_46}"
-  },
-  {
-    name: "Raksha Test",
-    description: "Raksha writes these tests",
-    productIdMapping: "{isisje3224jjdkji: APM_44}"
-  }, 
-  {
-    name: "Raksha2 Test",
-    description: "Raksha2 writes these tests",
-    productIdMapping: "{isisje322455jdkji: APM_45}"
-  },
-  {
-    name: "Raksha3 Test",
-    description: "Raksha 3writes these tests",
-    productIdMapping: "{a44isje3224jjdkji: APM_46}"
   }
 ]
+
+defaultTests = [...defaultTests, ...defaultTests, ...defaultTests]
 
 const HomePage = () => {
   // testConfig hook
@@ -53,26 +36,46 @@ const HomePage = () => {
   const [testConfigurations, setTestConfigurations] = useState(defaultTests)
 
   const handleSaveConfiguration = () => {
-    // do an API call to create configuration
-    // update hook
+    // an API call to create configuration
+    // update hook with response
     setTestConfigurations((prevConfigs) => [...prevConfigs, testForm])
   }
+
+  // button 
+  const titleButton =  (
+    <div className='app-body-header-buttons'>
+        <Button className='app-body-create-new-config-button' onClick={handleOpen}>+ Create New Configuration</Button>
+        <CreateNewConfiguration handleSave={handleSaveConfiguration} handleClose={handleClose} open={open}/>
+    </div>
+  )
+
+  // body 
+  const appBody = (
+    <div className='app-body-grid-content'>
+      {testConfigurations.map((testConfiguration, index) => (
+        <CardDisplay 
+          key={index} 
+          data={testConfiguration}
+          title={testConfiguration.name}
+          buttonTitle={"Show Results"}
+          link={`/testResults/${testConfiguration.name}`}
+        />
+      ))}
+    </div>
+  )
+
+  // get test configuraions on mount
+  useEffect(()=>{
+    // do an api call to do this
+    
+  }, [])
 
   return (
     <Page 
         title = "Test Configurations"
         cards = {testConfigurations}
-        titleButton = {(
-            <div className='app-body-header-button'>
-                <div className='app-body-button' onClick={handleOpen}>+ Create New Configuration</div>
-                <CreateNewConfiguration handleSave={handleSaveConfiguration} handleClose={handleClose} open={open}/>
-            </div>
-        )}
-        childrenComp = {
-            testConfigurations.map((testConfiguration, index) => (
-                <TestConfiguration key={index} testConfiguration={testConfiguration}/>
-            ))
-        }
+        titleButton = {titleButton}
+        childrenComp = {appBody}
     />
 
   );

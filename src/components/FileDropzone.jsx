@@ -2,17 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FaFileCsv, FaTimes } from 'react-icons/fa';
 
-const MyDropzone = () => {
-  const [uploadedFile, setUploadedFile] = useState(null);
-
-  const onDrop = useCallback(acceptedFiles => {
-    const file = acceptedFiles[0];
-    setUploadedFile(file);
-  }, []);
-
-  const onDelete = () => {
-    setUploadedFile(null);
-  };
+const MyDropzone = (props) => {
+  const {onDrop, onDelete, uploadedFile} = props
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -33,7 +24,7 @@ const MyDropzone = () => {
         </div>
       ): (
         <div {...getRootProps()} style={dropzoneStyles}>
-          <input {...getInputProps()} />
+          <input {...getInputProps()} name="mensaFile" value={uploadedFile}/>
           <p>Drag & drop a CSV file here or click to select a file</p>
         </div>
       )}
