@@ -4,7 +4,11 @@ import CardDisplay from '../components/CardDisplay';
 import { Button } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
-
+const classMapper = {
+  "IN-PROGRESS": "app-card-display-title-orange",
+  "APPROVED": "app-card-display-title-purple",
+  "DECLINED": "app-card-display-title-pink"
+}
 const defaultTestResults = [
   {
     name: "payload_1",
@@ -41,7 +45,9 @@ const defaultTestResults = [
     name: "payload_4",
     payload: {},
     result: {
-      result: "IN-PROGRESS"
+      result: "IN-PROGRESS",
+      turnDownReason: "Duplicate Application",
+      originalDecision: "APPROVED"
     }
   }
 ]
@@ -68,16 +74,43 @@ const TestResultsPage = () => {
   }, [])
 
   const pagebody = (
-    <div className='app-body-grid-content'>
-      {testResults.map((testResult, index) => (
-        <CardDisplay 
-          key={index} 
-          data={testResult.result}
-          title={testResult.name}
-          buttonTitle={"Show test information"}
-          link={`/testResults/${testId}/${testResult.name}`}
-        />
-      ))}
+    <div className='app-body-test-results'>
+      <div className='app-body-grid-content'>
+        {testResults.map((testResult, index) => (
+          <CardDisplay 
+            key={index} 
+            data={testResult.result}
+            title={testResult.name}
+            buttonTitle={"Show test information"}
+            link={`/testResults/${testId}/${testResult.name}`}
+            colorClass={classMapper[testResult.result.result]}
+          />
+        ))}
+      </div>
+      <div className='app-body-grid-content'>
+        {testResults.map((testResult, index) => (
+          <CardDisplay 
+            key={index} 
+            data={testResult.result}
+            title={testResult.name}
+            buttonTitle={"Show test information"}
+            link={`/testResults/${testId}/${testResult.name}`}
+            colorClass={classMapper[testResult.result.result]}
+          />
+        ))}
+      </div>
+      <div className='app-body-grid-content'>
+        {testResults.map((testResult, index) => (
+          <CardDisplay 
+            key={index} 
+            data={testResult.result}
+            title={testResult.name}
+            buttonTitle={"Show test information"}
+            link={`/testResults/${testId}/${testResult.name}`}
+            colorClass={classMapper[testResult.result.result]}
+          />
+        ))}
+      </div>
     </div>
   )
 

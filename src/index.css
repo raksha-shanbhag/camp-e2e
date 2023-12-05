@@ -73,7 +73,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-/* test configuration */
+/****  Card Display **** */
 .app-card-display {
   display: flex;
   flex-direction: column;
@@ -81,6 +81,18 @@ body {
   color: black;
   border-radius: 15px;
   border: 1px solid black;
+}
+
+.app-card-display-title-orange {
+  background-color: #f4980d !important;
+}
+
+.app-card-display-title-purple {
+  background-color: #bc54df !important;
+}
+
+.app-card-display-title-pink {
+  background-color: #f40d94 !important;
 }
 
 .app-card-display-title {
@@ -143,4 +155,10 @@ body {
 .app-body-form-error {
   color: red;
   font-size: 12px;
+}
+
+/****** app body for test results display *****/
+.app-body-test-results {
+  display: flex;
+  flex-direction: column;
 }

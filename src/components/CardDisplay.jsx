@@ -5,10 +5,10 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { Link } from 'react-router-dom';
 
 const CardDisplay = (props) => {
-    const {data, title, buttonTitle, link} = props
+    const {data, title, buttonTitle, link, colorClass} = props
     return (
         <Paper square={false} elevation={3} className="app-card-display">
-            <div className="app-card-display-title">
+            <div className={`app-card-display-title ${colorClass}`}>
                 {title}
             </div>
             <JsonDisplay data={data} />
