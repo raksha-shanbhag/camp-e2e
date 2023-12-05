@@ -6,11 +6,13 @@ import { Button } from '@mui/material';
 
 var defaultTests = [
   {
+    id: 200393,
     name: "Raksha Teaksha writes these testsaksha writes these testsaksha writes these testsst",
     description: "Raksha writes these tests",
     productIdMapping: "{isisje3224jjdkji: APM_{isisje3224jjdkji: APM_{isisje3224jjdkji: APM_44}"
   }, 
   {
+    id: 2003293,
     name: "Raksha2 Test",
     description: "Raksha2 writes these tests",
     productIdMapping: "{isisje322455jdkji: APM_45}"
@@ -58,7 +60,7 @@ const HomePage = () => {
           data={testConfiguration}
           title={testConfiguration.name}
           buttonTitle={"Show Results"}
-          link={`/testResults/${testConfiguration.name}`}
+          link={`/testResults/${testConfiguration.id}`}
         />
       ))}
     </div>

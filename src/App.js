@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage'
 import TestResultsPage from './pages/TestResultsPage';
+import TestResultByIdPage from './pages/TestResultByIdPage';
 
 const App = () => {
   return (
@@ -9,8 +10,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />}/>
         <Route
-          path="testResults/:test_id"
+          path="testResults/:testId"
           element={<TestResultsPage />}
+        />
+        <Route
+          path="testResults/:testId/:payloadId"
+          element={<TestResultByIdPage />}
         />
       </Routes>
     </BrowserRouter>
