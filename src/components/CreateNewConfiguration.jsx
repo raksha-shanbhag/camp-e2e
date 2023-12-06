@@ -6,9 +6,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import FileDropzone from './FileDropzone'
 import Papa from 'papaparse';
-import { Today } from '@mui/icons-material';
 
 const CreateNewConfiguration = (props) => {
+  const { open, handleClose, handleSave} = props
+
   // form
   const emptyForm = {
     testName: '',
@@ -37,7 +38,7 @@ const CreateNewConfiguration = (props) => {
       ...formData,
       mensaFile: file,
     });
-  }, [])
+  })
 
   const onDelete = () =>  {
     setFormData({
@@ -117,13 +118,15 @@ const CreateNewConfiguration = (props) => {
       dateCreated: today,
       lastUpdated: today,
     }
+    console.log(submitData)
+    handleSave()
   };
 
   // close the form
-  const handleClose = () => {
+  const handleCloseForm = () => {
     setFormData(emptyForm)
     setErrors(blankError)
-    props.handleClose()
+    handleClose()
   }
 
   // test configuration form
@@ -207,7 +210,7 @@ const CreateNewConfiguration = (props) => {
   return (
     <div>
       <Dialog
-        open={props.open}
+        open={open}
         scroll={'paper'}
         fullWidth = {true}
         maxWidth = {'sm'}
@@ -221,7 +224,7 @@ const CreateNewConfiguration = (props) => {
            {testConfigForm}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleCloseForm}>Cancel</Button>
           <Button className='' onClick={handleSubmit}>Save</Button>
         </DialogActions> 
       </Dialog> 

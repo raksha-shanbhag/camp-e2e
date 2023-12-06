@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FaFileCsv, FaTimes } from 'react-icons/fa';
 

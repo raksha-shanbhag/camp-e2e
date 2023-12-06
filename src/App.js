@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage'
 import TestResultsPage from './pages/TestResultsPage';
 import TestResultByIdPage from './pages/TestResultByIdPage';

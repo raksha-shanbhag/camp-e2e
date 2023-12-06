@@ -1,4 +1,4 @@
-import { Children, useState } from 'react';
+import React from 'react';
 import {AppBar, Toolbar, Typography} from '@mui/material';
 import { Link } from 'react-router-dom';
 import gandalf from '../icons/gandalf.png'
@@ -6,15 +6,6 @@ import gandalf from '../icons/gandalf.png'
 const Page = (props) => {
   // template properties
   const {title, titleButton, childrenComp, backLink} = props
-
-  // card hooks
-  const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  }
-  const handleOpen = () => {
-    setOpen(true);
-  } 
 
   return (
     <div className="app">

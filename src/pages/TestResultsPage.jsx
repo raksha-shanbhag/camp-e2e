@@ -4,11 +4,18 @@ import CardDisplay from '../components/CardDisplay';
 import { Button } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
-const classMapper = {
-  "IN-PROGRESS": "app-card-display-title-orange",
-  "APPROVED": "app-card-display-title-purple",
-  "DECLINED": "app-card-display-title-pink"
+const TestResultsKey = {
+  APPROVED: "APPROVED",
+  DECLINED: "DECLINED",
+  IN_PROGRESS: "IN-PROGRESS"
 }
+
+const classMapper = {
+  [TestResultsKey.APPROVED]: "app-card-display-title-orange",
+  [TestResultsKey.DECLINED]: "app-card-display-title-purple",
+  [TestResultsKey.IN_PROGRESS]: "app-card-display-title-pink"
+}
+
 const defaultTestResults = [
   {
     name: "payload_1",
@@ -73,44 +80,41 @@ const TestResultsPage = () => {
     setTestResults(results.testResults)
   }, [])
 
+  const section = (data, title) => {
+    return (
+      data.length > 0 &&
+      <div className='app-body-all-test-result-section'>
+        <h3>{title}</h3>
+        <div className='app-body-grid-content'>
+          {data.map((testResult, index) => (
+            <CardDisplay 
+              key={index} 
+              data={testResult.result}
+              title={testResult.name}
+              buttonTitle={"Show test information and history"}
+              link={`/testResults/${testId}/${testResult.name}`}
+              colorClass={classMapper[testResult.result.result]}
+            />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   const pagebody = (
-    <div className='app-body-test-results'>
-      <div className='app-body-grid-content'>
-        {testResults.map((testResult, index) => (
-          <CardDisplay 
-            key={index} 
-            data={testResult.result}
-            title={testResult.name}
-            buttonTitle={"Show test information"}
-            link={`/testResults/${testId}/${testResult.name}`}
-            colorClass={classMapper[testResult.result.result]}
-          />
-        ))}
-      </div>
-      <div className='app-body-grid-content'>
-        {testResults.map((testResult, index) => (
-          <CardDisplay 
-            key={index} 
-            data={testResult.result}
-            title={testResult.name}
-            buttonTitle={"Show test information"}
-            link={`/testResults/${testId}/${testResult.name}`}
-            colorClass={classMapper[testResult.result.result]}
-          />
-        ))}
-      </div>
-      <div className='app-body-grid-content'>
-        {testResults.map((testResult, index) => (
-          <CardDisplay 
-            key={index} 
-            data={testResult.result}
-            title={testResult.name}
-            buttonTitle={"Show test information"}
-            link={`/testResults/${testId}/${testResult.name}`}
-            colorClass={classMapper[testResult.result.result]}
-          />
-        ))}
-      </div>
+    <div className='app-body-all-test-results'>
+      {section(
+        testResults.filter((test)=> test.result.result === TestResultsKey.IN_PROGRESS), 
+        `${TestResultsKey.IN_PROGRESS} Results`
+      )}
+      {section(
+        testResults.filter((test)=> test.result.result === TestResultsKey.DECLINED), 
+        `${TestResultsKey.DECLINED} Results`
+      )}
+      {section(
+        testResults.filter((test)=> test.result.result === TestResultsKey.APPROVED), 
+        `${TestResultsKey.APPROVED} Results`
+      )}
     </div>
   )
 

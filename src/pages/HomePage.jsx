@@ -31,13 +31,10 @@ const HomePage = () => {
       setOpen(true);
   }
 
-  // testform hook 
-  const [testForm, setTestForm] = useState();
-
   // testConfiguration hook
   const [testConfigurations, setTestConfigurations] = useState(defaultTests)
 
-  const handleSaveConfiguration = () => {
+  const handleSaveConfiguration = (testForm) => {
     // an API call to create configuration
     // update hook with response
     setTestConfigurations((prevConfigs) => [...prevConfigs, testForm])
