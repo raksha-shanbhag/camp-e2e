@@ -118,7 +118,7 @@ const CreateNewConfiguration = (props) => {
       dateCreated: today,
       lastUpdated: today,
     }
-    console.log(submitData)
+
     handleSave()
   };
 
@@ -168,7 +168,7 @@ const CreateNewConfiguration = (props) => {
             onChange={handleInputChange}
           />
         </label>
-        {errors.description && <div className='app-body-form-error'>{errors.description}</div>}
+        {errors.productIdMapping && <div className='app-body-form-error'>{errors.productIdMapping}</div>}
       </div>
       <br />
       <div>

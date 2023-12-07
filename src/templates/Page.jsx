@@ -14,6 +14,7 @@ const Page = (props) => {
           <img src={gandalf} alt="gandalf.png"/>
           <Typography
             variant="h4"
+            data-testid="app-header-title"
           >
             CAMP-E2E
           </Typography>

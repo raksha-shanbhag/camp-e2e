@@ -12,7 +12,7 @@ const CardDisplay = (props) => {
                 {title}
             </div>
             <JsonDisplay data={data} />
-            <Link className="app-card-display-footer" to={link} style={{ textDecoration: 'none', color: 'black' }}>
+            <Link data-testid="app-card-display-footer-link" className="app-card-display-footer" to={link} style={{ textDecoration: 'none', color: 'black' }}>
                 {buttonTitle}
                 <NavigateNextIcon fontSize="medium"/>
             </Link>
