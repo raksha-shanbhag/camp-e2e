@@ -3,6 +3,8 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import CreateNewConfiguration from './CreateNewConfiguration';
 
+import Papa from 'papaparse';
+
 describe('CreateNewConfiguration', () => {
   it('renders the component', () => {
     const props = {
@@ -113,5 +115,34 @@ describe('CreateNewConfiguration', () => {
 
     // Check if handleClose is called
     expect(props.handleClose).toHaveBeenCalled();
+  });
+
+  it('handles CSV parsing', async () => {
+    // Mock Papa.parse
+    jest.mock('papaparse', () => ({
+        parse: jest.fn(),
+    }));
+    
+    const { getByLabelText } = render(<CreateNewConfiguration open={true} />);
+    const fileInput = getByLabelText('Mensa File:');
+
+    // Simulate file drop event
+    fireEvent.drop(fileInput, {
+      dataTransfer: {
+        files: [new File(['csv data'], 'test.csv', { type: 'text/csv' })],
+      },
+    });
+
+    // Wait for the parsing to complete (assuming asynchronous parsing)
+    await waitFor(() => expect(Papa.parse).toHaveBeenCalledTimes(1));
+
+    // Check if the Papa.parse function was called with the correct arguments
+    expect(Papa.parse).toHaveBeenCalledWith(
+      'csv data',
+      expect.objectContaining({
+        complete: expect.any(Function),
+        header: true,
+      })
+    );
   });
 });
